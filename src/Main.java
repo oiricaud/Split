@@ -5,16 +5,20 @@ public class Main {
 
     }
     public String split(String s, int length){
-        String r = new String();
+        String r = new String("");
         String sub;
         for(int i = 0; i < s.length(); i+=length){
             if(i+length > s.length()){
                 sub = s.substring(i, s.length());
-                r = r + sub;
             }
             else{
                 sub = s.substring(i, i+length);
-                r = r + sub + ", ";
+            }
+            if (r.equals("")){
+                r = sub;
+            }
+            else{
+                r = r + ", " + sub ;
             }
         }
         return r;
