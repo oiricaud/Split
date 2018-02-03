@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainTest {
     int maxNum = Integer.MAX_VALUE;
@@ -14,13 +15,13 @@ public class MainTest {
         String[] expectedOutput = new String[]{"a"};
 
         String[] actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
 
     @Test
     void test_2() {
         Main main = new Main();
-        String string = "a";
+        String string = "aa";
         int size = 1;
         String[] expectedOutput = new String[]{"a", "a"};
 
@@ -46,7 +47,7 @@ public class MainTest {
         Main main = new Main();
         String string = "@pple";
         int size = 2;
-        String[] expectedOutput = new String[]{"@p", "pl", "le"};
+        String[] expectedOutput = new String[]{"@p", "pl", "e"};
 
         String[] actualOutput = main.split(string, size);
         assertEquals(expectedOutput[0], actualOutput[0]);
@@ -92,7 +93,7 @@ public class MainTest {
 
         String string = "d0g";
         int size = 10;
-        String[] expectedOutput = new String[]{"dog"};
+        String[] expectedOutput = new String[]{"d0g"};
 
         String[] actualOutput = main.split(string, size);
         assertEquals(expectedOutput[0], actualOutput[0]);
@@ -115,7 +116,7 @@ public class MainTest {
         Main main = new Main();
         String string = "apple";
         int size = 0xffff;
-        String[] expectedOutput = new String[]{"error"};
+        String[] expectedOutput = new String[]{"apple"};
 
         String[] actualOutput = main.split(string, size);
         assertEquals(expectedOutput[0], actualOutput[0]);
@@ -126,10 +127,8 @@ public class MainTest {
         Main main = new Main();
         String string = "apple";
         int size = maxNum + 1;
-        String[] expectedOutput = new String[]{"error"};
-
-        String[] actualOutput = main.split(string, size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(string, size);} );
     }
 
     @Test
@@ -148,17 +147,15 @@ public class MainTest {
         Main main = new Main();
         String string = "";
         int size = 0;
-        String[] expectedOutput = new String[]{""};
-
-        String[] actualOutput = main.split(string, size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(string, size);} );
     }
 
     @Test
     void test_14() {
         Main main = new Main();
         String string = "a\\tp\\np\\rl\\ce";
-        int size = 0;
+        int size = 2;
         String[] expectedOutput = new String[]{"a't\'", "p'n\'", "p'r\'", "e'c\'"};
 
         String[] actualOutput = main.split(string, size);
@@ -175,7 +172,7 @@ public class MainTest {
         for (int a = 1; a < array.length; a++) {
             numbers = numbers + a + " ";
         }
-        int size = 0;
+        int size = 10;
 
         String[] actualOutput = main.split(numbers, size);
         for (int i = 0; i < array.length; i++) {
@@ -188,11 +185,8 @@ public class MainTest {
         Main main = new Main();
         float floatingnNum = 1.2932f;
         int size = maxNum + 2;
-        String[] expectedOutput = new String[]{"error"};
-
-        String[] actualOutput = main.split(String.valueOf(floatingnNum), size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
-
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(String.valueOf(floatingnNum), size);} );
     }
 
     @Test
@@ -200,11 +194,8 @@ public class MainTest {
         Main main = new Main();
         String string = null;
         int size = 2;
-        String[] expectedOutput = new String[]{"0"};
-
-        String[] actualOutput = main.split(string, size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
-
+        Throwable exception = assertThrows(NullPointerException.class,
+                ()->{main.split(string, size);} );
     }
 
     @Test
@@ -212,11 +203,8 @@ public class MainTest {
         Main main = new Main();
         long num = new Long("2147483648");
         int size = 0;
-        String[] expectedOutput = new String[]{"2147483648"};
-
-        String[] actualOutput = main.split(String.valueOf(num), size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
-
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(String.valueOf(num), size);} );
     }
 
     @Test
@@ -237,8 +225,8 @@ public class MainTest {
         int size = 0;
         String[] expectedOutput = new String[]{"error"};
 
-        String[] actualOutput = main.split(String.valueOf(string), size);
-        assertEquals(expectedOutput, actualOutput);
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(String.valueOf(string), size);} );
     }
 
     @Test
@@ -246,10 +234,8 @@ public class MainTest {
         Main main = new Main();
         String nullString = null;
         int size = Integer.parseInt(null);
-        String[] expectedOutput = new String[]{"error"};
-
-        String[] actualOutput = main.split(nullString, size);
-        assertEquals(expectedOutput[0], actualOutput[0]);
+        Throwable exception = assertThrows(IllegalArgumentException.class,
+                ()->{main.split(nullString, size);} );
     }
 
     @Test
@@ -257,12 +243,9 @@ public class MainTest {
         Main main = new Main();
         String emoji = "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00";
         int size = Integer.parseInt(null);
-        String[] expectedOutput = new String[]{"\uD83D\uDE00", "\uD83D\uDE00", "\uD83D\uDE00", "\uD83D\uDE00"};
 
-        String[] actualOutput = main.split(emoji, size);
-        for (int i = 0; i < expectedOutput.length; i++) {
-            assertEquals(expectedOutput[i], actualOutput[i]);
-        }
+        Throwable exception = assertThrows(NumberFormatException.class,
+                ()->{main.split(emoji, size);} );
     }
 
     @Test
@@ -282,24 +265,16 @@ public class MainTest {
         Main main = new Main();
         String string = null;
         int size = 1;
-        String[] expectedOutput = new String[]{"error"};
-
-        String[] actualOutput = main.split(string, size);
-        for (int i = 0; i < expectedOutput.length; i++) {
-            assertEquals(expectedOutput[i], actualOutput[i]);
-        }
+        Throwable exception = assertThrows(NullPointerException.class,
+                ()->{main.split(string, size);} );
     }
     @Test
     void test_24() {
         Main main = new Main();
         String string = null;
         int size = -1;
-        String[] expectedOutput = new String[]{"error"};
-
-        String[] actualOutput = main.split(string, size);
-        for (int i = 0; i < expectedOutput.length; i++) {
-            assertEquals(expectedOutput[i], actualOutput[i]);
-        }
+        Throwable exception = assertThrows(NullPointerException.class,
+                ()->{main.split(string, size);} );
     }
     @Test
     void test_25() {
@@ -318,17 +293,13 @@ public class MainTest {
         Main main = new Main();
         double doubleDouble = -2.0000;
         int size = 2;
-        String[] expectedOutput = new String[]{"-2", ".0", "00", "0"};
-
-        String[] actualOutput = main.split(String.valueOf(doubleDouble), size);
-        for (int i = 0; i < expectedOutput.length; i++) {
-            assertEquals(expectedOutput[i], actualOutput[i]);
-        }
+        Throwable exception = assertThrows(ArrayIndexOutOfBoundsException.class,
+                ()->{main.split(String.valueOf(doubleDouble), size);} );
     }
     @Test
     void test_27() {
         Main main = new Main();
-        String string = "U+0041U+0041 U+0041U+0041";
+        String string = "U+0041U+0041 U+0041U+0041 U+0041U+0041 U+0041U+0041";
         int size = 2;
         String[] expectedOutput = new String[]{"aa", "aa"};
 
@@ -365,7 +336,7 @@ public class MainTest {
     void test_30() {
         Main main = new Main();
         String string = "U+0041pple";
-        int size = -1;
+        int size = 2;
         String[] expectedOutput = new String[]{"ap", "pp", "le"};
 
         String[] actualOutput = main.split(string, size);
