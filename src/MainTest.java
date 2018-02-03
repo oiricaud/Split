@@ -277,4 +277,100 @@ public class MainTest {
             assertEquals(expectedOutput[i], actualOutput[i]);
         }
     }
+    @Test
+    void test_23() {
+        Main main = new Main();
+        String string = null;
+        int size = 1;
+        String[] expectedOutput = new String[]{"error"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_24() {
+        Main main = new Main();
+        String string = null;
+        int size = -1;
+        String[] expectedOutput = new String[]{"error"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_25() {
+        Main main = new Main();
+        double doubleDouble = 2.0000;
+        int size = 2;
+        String[] expectedOutput = new String[]{"2.", "00", "00"};
+
+        String[] actualOutput = main.split(String.valueOf(doubleDouble), size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_26() {
+        Main main = new Main();
+        double doubleDouble = -2.0000;
+        int size = 2;
+        String[] expectedOutput = new String[]{"-2", ".0", "00", "0"};
+
+        String[] actualOutput = main.split(String.valueOf(doubleDouble), size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_27() {
+        Main main = new Main();
+        String string = "U+0041U+0041 U+0041U+0041";
+        int size = 2;
+        String[] expectedOutput = new String[]{"aa", "aa"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_28() {
+        Main main = new Main();
+        String string = "U+0041U+0041 U+0041U+0041";
+        int size = 0;
+        String[] expectedOutput = new String[]{"aaaa"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_29() {
+        Main main = new Main();
+        String string = "U+0041U+0041 U+0041U+0041";
+        int size = -1;
+        String[] expectedOutput = new String[]{"invalid"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+    @Test
+    void test_30() {
+        Main main = new Main();
+        String string = "U+0041pple";
+        int size = -1;
+        String[] expectedOutput = new String[]{"ap", "pp", "le"};
+
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
 }
