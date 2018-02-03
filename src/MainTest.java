@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,214 +9,218 @@ public class MainTest {
     @Test
     void test_1() {
         Main main = new Main();
-        String string = "apple";
-        int size = 2;
-        String expectedOutput = "ap, pl, e";
+        String string = "a";
+        int size = 1;
+        String[] expectedOutput = new String[]{"a"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
+        String[] actualOutput = main.split(string, size);
         assertEquals(expectedOutput, actualOutput);
     }
+
     @Test
     void test_2() {
         Main main = new Main();
-        String string = "@pple";
-        int size = 2;
-        String expectedOutput = "@p, pl, e";
+        String string = "a";
+        int size = 1;
+        String[] expectedOutput = new String[]{"a", "a"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+        assertEquals(expectedOutput[1], actualOutput[1]);
     }
+
     @Test
     void test_3() {
         Main main = new Main();
-        String string = "";
-        int size = 0;
-        String expectedOutput = "";
+        String string = "最近の更新新";
+        int size = 2;
+        String[] expectedOutput = new String[]{"最近", "の更", "新新"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+        assertEquals(expectedOutput[1], actualOutput[1]);
     }
+
     @Test
     void test_4() {
         Main main = new Main();
-        String string = "\\t\\n\\r\\c";
+        String string = "@pple";
         int size = 2;
-        String expectedOutput = "\\t, \\n, \\r, \\c";
+        String[] expectedOutput = new String[]{"@p", "pl", "le"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+        assertEquals(expectedOutput[1], actualOutput[1]);
+        assertEquals(expectedOutput[2], actualOutput[2]);
     }
+
     @Test
     void test_5() {
         Main main = new Main();
-        String string = "12345";
-        int size = 2;
-        String expectedOutput = "12, 23, 45";
+        String string = "(2^31)-1";
+        int size = maxNum + 1;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
     }
+
     @Test
     void test_6() {
         Main main = new Main();
-        String string = "1.2932";
-        int size = 2;
-        String expectedOutput = "1., 29, 32";
+        String string = "(2^31)+1";
+        int size = 0;
+        String[] expectedOutput = new String[]{"(2^31)-1"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
+
     @Test
     void test_7() {
         Main main = new Main();
-        String string = null;
-        int size = 2;
-        String expectedOutput = "0";
+        String string = "dog";
+        int size = 10;
+        String[] expectedOutput = new String[]{"dog"};
 
-        String actualOutput = main.split(string, size);
-        System.out.println("actualOutput " + actualOutput);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
-    @Disabled
+
     @Test
     void test_8() {
         Main main = new Main();
 
-        String string = "2147483648";
-        int size = 0;
-        String expectedOutput = "2147483648";
+        String string = "d0g";
+        int size = 10;
+        String[] expectedOutput = new String[]{"dog"};
 
-        String actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
-    @Disabled
+
     @Test
     void test_9() {
         Main main = new Main();
-        String string = "2147483646";
-        int size = 0;
-        String expectedOutput = "2147483646";
 
-        String actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        String string = "d0g";
+        int size = -1;
+        String[] expectedOutput = new String[]{"error"};
+
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
+
     @Test
     void test_10() {
         Main main = new Main();
-        String string = "2147483648";
-        int size = 2;
-        String expectedOutput = "21, 47, 48, 36, 48";
+        String string = "apple";
+        int size = 0xffff;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
+
     @Test
     void test_11() {
         Main main = new Main();
-        String string = "2147483646";
-        int size = 2;
-        String expectedOutput = "21, 47, 48, 36, 46";
+        String string = "apple";
+        int size = maxNum + 1;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
+
     @Test
     void test_12() {
         Main main = new Main();
-        String string = "dog";
-        int size = 10;
-        String expectedOutput = "dog";
+        String string = "apple";
+        int size = minNum - 1;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, size);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
+
     @Test
     void test_13() {
         Main main = new Main();
-        String word = "word";
-        word.substring(3);
-        int size = 2;
-        String expectedOutput = "d";
+        String string = "";
+        int size = 0;
+        String[] expectedOutput = new String[]{""};
 
-        String actualOutput = main.split(word, size);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
     }
-    @Disabled
+
     @Test
     void test_14() {
         Main main = new Main();
-        String string = "apple";
-        String expectedOutput = "error";
+        String string = "a\\tp\\np\\rl\\ce";
+        int size = 0;
+        String[] expectedOutput = new String[]{"a't\'", "p'n\'", "p'r\'", "e'c\'"};
 
-        String actualOutput = main.split(string, maxNum+1);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
     }
-    @Disabled
+
     @Test
     void test_15() {
         Main main = new Main();
-        String string = "apple";
-        String expectedOutput = "error";
+        String[] array = new String[100];
+        String numbers = "";
+        for (int a = 1; a < array.length; a++) {
+            numbers = numbers + a + " ";
+        }
+        int size = 0;
 
-        String actualOutput = main.split(string, minNum-1);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(numbers, size);
+        for (int i = 0; i < array.length; i++) {
+            assertEquals(String.valueOf(i + 1), actualOutput[i]);
+        }
     }
-    @Disabled
+
     @Test
     void test_16() {
         Main main = new Main();
-        String string = "(2^31)-1";
-        String expectedOutput = "error";
+        float floatingnNum = 1.2932f;
+        int size = maxNum + 2;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, minNum+1);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(String.valueOf(floatingnNum), size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+
     }
-    @Disabled
+
     @Test
     void test_17() {
         Main main = new Main();
-        String string = "(2^31)+1";
-        String expectedOutput = "error";
+        String string = null;
+        int size = 2;
+        String[] expectedOutput = new String[]{"0"};
 
-        String actualOutput = main.split(string, 0);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+
     }
+
     @Test
     void test_18() {
         Main main = new Main();
-        String string = "";
-        String expectedOutput = "";
+        long num = new Long("2147483648");
+        int size = 0;
+        String[] expectedOutput = new String[]{"2147483648"};
 
-        String actualOutput = main.split(string, 0);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(String.valueOf(num), size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+
     }
+
     @Test
     void test_19() {
-        Main main = new Main();
-        String string = "";
-        String expectedOutput = "";
-
-        String actualOutput = main.split(string, 2);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_20() {
-        Main main = new Main();
-        String string = "apple";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, -1);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Disabled
-    @Test
-    void test_21() {
         Main main = new Main();
 
         StringBuilder string = new StringBuilder();
@@ -232,104 +235,46 @@ public class MainTest {
         System.out.println(string.toString().length());
 
         int size = 0;
-        String expectedOutput = "0";
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string.toString(), size);
+        String[] actualOutput = main.split(String.valueOf(string), size);
         assertEquals(expectedOutput, actualOutput);
     }
+
+    @Test
+    void test_20() {
+        Main main = new Main();
+        String nullString = null;
+        int size = Integer.parseInt(null);
+        String[] expectedOutput = new String[]{"error"};
+
+        String[] actualOutput = main.split(nullString, size);
+        assertEquals(expectedOutput[0], actualOutput[0]);
+    }
+
+    @Test
+    void test_21() {
+        Main main = new Main();
+        String emoji = "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00";
+        int size = Integer.parseInt(null);
+        String[] expectedOutput = new String[]{"\uD83D\uDE00", "\uD83D\uDE00", "\uD83D\uDE00", "\uD83D\uDE00"};
+
+        String[] actualOutput = main.split(emoji, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
+    }
+
     @Test
     void test_22() {
         Main main = new Main();
-        String string = "null";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, Integer.parseInt(null));
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_23() {
-        Main main = new Main();
-        String string = "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00"; // 4 emojis
-        String expectedOutput = "\uD83D\uDE00\uD83D\uDE00,\uD83D\uDE00 \uD83D\uDE00";
-
-        String actualOutput = main.split(string, 2);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    /*
-    @Test
-    void test_24() {
-        Main main = new Main();
-        String string = "\uD83D\uDE00\uD83D\uDE00"; // emojis
-        String expectedOutput = "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00 " +
-                "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00," +
-                "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00 " +
-                "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00";
-
-        String actualOutput = main.split(string, 😀😀);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    */
-    @Test
-    void test_25() {
-        Main main = new Main();
-        String string = "apple";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, 0xffff);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_26() {
-        Main main = new Main();
-        String string = "0xffff";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, 0xffff);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_27() {
-        Main main = new Main();
-        String string = "a";
-        String expectedOutput = "a";
-
-        String actualOutput = main.split(string, 1);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_28() {
-        Main main = new Main();
-        String string = "最近の更新新";
-        String expectedOutput = "最近, の更, 新新";
-
-        String actualOutput = main.split(string, 2);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_29() {
-        Main main = new Main();
         String string = "car\\ntable";
-        String expectedOutput = "error";
+        int size = 2;
+        String[] expectedOutput = new String[]{"error"};
 
-        String actualOutput = main.split(string, 2);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_30() {
-        Main main = new Main();
-        String string = "null";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, 1);
-        assertEquals(expectedOutput, actualOutput);
-    }
-    @Test
-    void test_31() {
-        Main main = new Main();
-        String string = "null";
-        String expectedOutput = "error";
-
-        String actualOutput = main.split(string, -1);
-        assertEquals(expectedOutput, actualOutput);
+        String[] actualOutput = main.split(string, size);
+        for (int i = 0; i < expectedOutput.length; i++) {
+            assertEquals(expectedOutput[i], actualOutput[i]);
+        }
     }
 }
